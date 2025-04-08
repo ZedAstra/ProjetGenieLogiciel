@@ -1,0 +1,1 @@
+import{a as r,t}from"../chunks/CPxMcCbd.js";import"../chunks/BeGRA1aL.js";import"../chunks/D4W2DxoK.js";var p=t('<div class="prose"><h1>Paramètres</h1></div>');function s(a){var o=p();r(a,o)}export{s as component};
