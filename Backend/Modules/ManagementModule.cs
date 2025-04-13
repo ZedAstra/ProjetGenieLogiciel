@@ -84,7 +84,6 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status500InternalServerError);
 
             #region Rapports
-
             app.MapGet("chantier/{chantierId}/management/report/{annee}/{mois}", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("Mois")] int mois, [Description("Année")] int annee) =>
             {
                 var rapport = await db.Rapports.FindAsync(chantierId, annee, mois);
@@ -120,8 +119,9 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status401Unauthorized)
                 .Produces(StatusCodes.Status403Forbidden)
                 .Produces(StatusCodes.Status500InternalServerError);
+            #endregion Rapports
 
-            #endregion
+        }
 
         public byte[] GenerateReport(AppDbContext db, int mois, int année)
         {
