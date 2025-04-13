@@ -1,0 +1,44 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Text.Json.Serialization;
+
+namespace Backend.Models.Management
+{
+    public class Mouvement : BaseEntity
+    {
+        public int RessourceId { get; set; }
+        public Ressource Ressource { get; set; } = null!;
+        public DateTime Date { get; set; }
+        public decimal Quantite { get; set; }
+        public TypeMouvement Type { get; set; }
+
+        public enum TypeMouvement
+        {
+            Entrée,
+            Sortie
+        }
+
+        public CompactMouvement CompactEntity() => new()
+        {
+            Resource = Ressource.Id,
+            Id = Id,
+            Date = Date,
+            Quantite = Quantite,
+            Type = Type
+        };
+
+        public class CompactMouvement
+        {
+            public int Resource { get; init; }
+            public int Id { get; init; }
+            public DateTime Date { get; init; }
+            public decimal Quantite { get; init; }
+            public TypeMouvement Type { get; init; }
+
+            public Mouvement Expand(DbContext db)
+            {
+                return db.Set<Mouvement>().Find(Resource, Id) ?? throw new Exception($"Mouvement with id {Id} not found");
+            }
+        }
+    }
+}

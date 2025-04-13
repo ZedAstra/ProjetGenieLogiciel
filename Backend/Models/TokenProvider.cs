@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -7,14 +6,13 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Backend.Models
 {
     public sealed class TokenProvider(IConfiguration config)
     {
-        public async Task<string> Create(User user)
+        public async Task<string> Create(Utilisateur user)
         {
             string secret = config["Jwt:Secret"];
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
@@ -25,10 +23,10 @@ namespace Backend.Models
                 Subject = new ClaimsIdentity([
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Name, user.Name),
-                    new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-                    new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                    new Claim(JwtRegisteredClaimNames.GivenName, user.Prenom),
+                    new Claim(JwtRegisteredClaimNames.FamilyName, user.Nom),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("role", user.UserRole.ToString())
+                    new Claim("role", user.RoleUtilisateur.ToString())
                 ]),
                 Expires = DateTime.UtcNow.AddHours(24),
                 SigningCredentials = credentials,
@@ -40,7 +38,7 @@ namespace Backend.Models
             return tokenHandler.CreateToken(tokenDescriptor);
         }
 
-        public async Task<User>? GetUser(string token, AppDbContext context)
+        public async Task<Utilisateur?> GetUser(string token, AppDbContext context)
         {
             var tokenHandler = new JsonWebTokenHandler();
             var tokenValidationResult = await tokenHandler.ValidateTokenAsync(token.StartsWith("Bearer ") ? token.Replace("Bearer ", "") : token, Program.TokenValidationParameters);
@@ -51,11 +49,11 @@ namespace Backend.Models
             else if (tokenValidationResult.IsValid)
             {
                 var id = tokenValidationResult.Claims.FirstOrDefault(claim => claim.Key == JwtRegisteredClaimNames.Sub).Value.ToString();
-                if (id == null)
+                if (id == null || !id.Any(char.IsDigit))
                 {
                     return null;
                 }
-                return context.Users.Find(Guid.Parse(id));
+                return await context.Users.FindAsync(int.Parse(id));
             }
             else
             {
@@ -65,14 +63,14 @@ namespace Backend.Models
 
         public async Task<bool> Validate(string token)
         {
-            var tokenHandler = new JsonWebTokenHandler();
-            var tokenValidationResult = await tokenHandler.ValidateTokenAsync(token.StartsWith("Bearer ") ? token.Replace("Bearer ", "") : token, Program.TokenValidationParameters);
+            JsonWebTokenHandler tokenHandler = new JsonWebTokenHandler();
+            TokenValidationResult? tokenValidationResult = await tokenHandler.ValidateTokenAsync(token.StartsWith("Bearer ") ? token.Replace("Bearer ", "") : token, Program.TokenValidationParameters);
             return tokenValidationResult.IsValid;
         }
 
-        public async Task<bool> IsAuthorized(HttpRequest request, AppDbContext db, Func<User, bool> condition)
+        public async Task<bool> IsAuthorized(HttpRequest request, AppDbContext db, Func<Utilisateur, bool> condition)
         {
-            var user = await GetUser(request.Headers["Authorization"], db);
+            var user = await GetUser(request.Headers.Authorization.FirstOrDefault(x => x != null && x.StartsWith("Bearer")) ?? "", db);
             if (user == null) return false;
             return condition(user);
         }

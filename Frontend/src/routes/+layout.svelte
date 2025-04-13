@@ -1,17 +1,20 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { getAppState } from '$lib/app.svelte';
-	import { injectPlatform } from '$lib/platformInterface';
 	import '../app.css';
-	
+	import { AppBar, AppLayout } from 'svelte-ux';
 	let { children } = $props();
-	injectPlatform();
-
-	function init() {
-		//if(getAppState().isLoggedIn) goto('/app');
-	}
-	init();
 </script>
 
-{@render children()}
-
+<AppLayout>
+	<svelte:fragment slot="nav">
+	  <!-- Nav menu -->
+	</svelte:fragment>
+  
+	<AppBar title="Example">
+	  <div slot="actions">
+		<!-- App actions -->
+	  </div>
+	</AppBar>
+	<main>
+		{@render children()}
+	</main>	
+</AppLayout>

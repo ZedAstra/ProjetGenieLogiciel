@@ -1,92 +1,148 @@
 ﻿using Backend.Models;
 using Backend.Models.Management;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace Backend.Modules
 {
-    public class ManagementModule
+    public class ManagementModule : IModule
     {
-        public static void Setup(WebApplication app)
+        private CultureInfo French = CultureInfo.GetCultureInfo("fr-FR");
+        public void Setup(WebApplication app)
         {
-            app.MapGet("/management/resources", async (HttpContext ctx, AppDbContext db, TokenProvider provider) =>
+            app.MapGet("chantier/{chantierId}/management/resources", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId) =>
             {
-                var result = db.Ressources.ToList();
-                return Results.Ok(result);
+                var resources = await db.Ressources.Where(r => r.Chantier.Id == chantierId)
+                    .Select(r => r.CompactEntity())
+                    .ToListAsync();
+                return Results.Ok(resources);
             })
-                .RequireAuthorization("Management")
+                .RequireAuthorization("Authenticated")
+                .WithName("GetAllResources")
                 .WithTags("Management")
-                .WithName("management.resources")
-                .WithDisplayName("Ressources")
-                .WithDescription("Lister les ressources disponnibles")
-                .Produces<List<Ressource>>(200)
-                .Produces(401);
+                .WithDescription("Lister toutes les ressources du chantier")
+                .Produces<List<Ressource.CompactRessource>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
 
-            app.MapPost("/management/resources/add", async (HttpContext ctx, AppDbContext db, TokenProvider provider, [FromForm] string name, [FromForm] decimal quantity, [FromForm] string unit) =>
+            app.MapGet("chantier/{chantierId}/management/resources/{resourceId}", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("L'identifiant de la ressource")] int resourceId) =>
             {
-                Ressource? res = await db.Ressources.FindAsync(name);
-                // Already exists
-                if (res != null) return Results.Conflict("Resource already exists. Maybe you meant to update it?");
-                else
-                {
-                    var newRes = new Ressource()
-                    {
-                        Nom = name,
-                        Quantité = quantity,
-                        Unité = unit
-                    };
-                    db.Ressources.Add(newRes);
-                    await db.SaveChangesAsync();
-                    return Results.Ok(newRes);
-                }
+                var resource = await db.Ressources.FindAsync(chantierId, resourceId);
+                return resource is not null ? Results.Ok(resource) : Results.NotFound();
+            })
+                .RequireAuthorization("Authenticated")
+                .WithName("GetResourceById")
+                .WithTags("Management")
+                .WithDescription("Obtenir une ressource spécifique")
+                .Produces<Ressource.CompactRessource>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            app.MapGet("chantier/{chantierId}/management/resources/{resourceId}/movements", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("L'identifiant de la ressource")] int resourceId) =>
+            {
+                var movements = await db.Mouvements.Where(m => m.Ressource.Id == resourceId && m.Ressource.Chantier.Id == chantierId)
+                    .Select(m => m.CompactEntity())
+                    .ToListAsync();
+                return Results.Ok(movements);
+            })
+                .RequireAuthorization("Authenticated")
+                .WithName("GetResourceMovements")
+                .WithTags("Management")
+                .WithDescription("Lister tous les mouvements d'une ressource spécifique")
+                .Produces<List<Mouvement.CompactMouvement>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            app.MapGet("chantier/{chantierId}/management/movement/{movementId}", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("L'identifiant du mouvement")] int movementId) =>
+            {
+                var movement = await db.Mouvements.FindAsync(chantierId, movementId);
+                return movement is not null ? Results.Ok(movement) : Results.NotFound();
+            })
+                .RequireAuthorization("Authenticated")
+                .WithName("GetMovementById")
+                .WithTags("Management")
+                .WithDescription("Obtenir un mouvement spécifique d'une ressource spécifiée")
+                .Produces<Mouvement.CompactMouvement>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            #region Rapports
+
+            app.MapGet("chantier/{chantierId}/management/report/{annee}/{mois}", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("Mois")] int mois, [Description("Année")] int annee) =>
+            {
+                var rapport = await db.Rapports.FindAsync(chantierId, annee, mois);
+                if (rapport == null) return Results.NotFound("Aucun rapport trouvé pour le mois et l'année spécifiés");
+
+                return Results.File(rapport.Fichier, "application/vnd.ms-excel", $"rapport_{French.DateTimeFormat.GetMonthName(mois)}_{annee}.xlsx", true);
             })
                 .RequireAuthorization("Management")
+                .WithName("GetReport")
                 .WithTags("Management")
-                .WithName("management.new_resource")
-                .WithDisplayName("Ajouter une ressource")
-                .WithDescription("Ajouter une nouvelle ressource")
-                .Produces<Ressource>(200)
-                .Produces(409)
-                .DisableAntiforgery();
-            
-            app.MapPost("/management/resources/update", async (HttpContext ctx, AppDbContext db, [FromBody] Ressource resource) =>
+                .WithDescription("Obtenir un rapport pour le mois et l'année spécifiés")
+                .Produces<byte[]>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+
+            app.MapPost("chantier/{chantierId}/management/generate_report", async (AppDbContext db, [Description("L'identifiant du chantier")] int chantierId, [Description("Mois")] int mois, [Description("Année")] int annee) =>
             {
-                Ressource? existing = db.Ressources.Find(resource.Nom);
-                if (existing == null) return Results.NotFound();
-                if(resource.Quantité != -1) existing.Quantité = resource.Quantité;
-                if (resource.Unité != "?") existing.Unité = resource.Unité;
-                db.Update(existing);
-                await db.SaveChangesAsync();
-                return Results.Ok(existing);
+                if (mois < 1 || mois > 12) return Results.BadRequest("Mois invalide");
+                if (!db.Mouvements.Any(m => m.Date.Year == annee && m.Date.Month == mois)) return Results.NotFound("Aucun mouvement trouvé pour le mois et l'année spécifiés");
+                var doc = GenerateReport(db, mois, annee);
+                return Results.CreatedAtRoute($"chantier/{chantierId}/management/report/{annee}/{mois}");
             })
                 .RequireAuthorization("Management")
+                .WithName("GenerateReport")
                 .WithTags("Management")
-                .WithName("management.update_resource")
-                .WithDisplayName("Modifier une ressource")
-                .WithDescription("Modifier une ressource existante")
-                .Produces<Ressource>(200)
-                .Produces(404);
-            
-            app.MapDelete("/management/resources/{name}", async (HttpContext ctx, AppDbContext db, [FromRoute] string name) =>
+                .WithDescription("Générer un rapport pour le mois et l'année spécifiés")
+                .Produces(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status400BadRequest)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            #endregion
+
+        public byte[] GenerateReport(AppDbContext db, int mois, int année)
+        {
+            List<Mouvement> mouvements = db.Mouvements
+                .Where(m => m.Date.Year == année && m.Date.Month == mois)
+                .Include(m => m.Ressource)
+                .ToList();
+            List<Ressource> ressources = db.Ressources
+                .Include(r => r.Chantier)
+                .ToList();
+            using MemoryStream stream = new MemoryStream();
+            using (var workbook = new XLWorkbook())
             {
-                Ressource? existing = db.Ressources.Find(name);
-                if (existing == null) return Results.NotFound();
-                db.Ressources.Remove(existing);
-                await db.SaveChangesAsync();
-                return Results.Ok();
-            })
-                .RequireAuthorization("Management")
-                .WithTags("Management")
-                .WithName("management.delete_resource")
-                .WithDisplayName("Supprimer une ressource")
-                .WithDescription("Supprimer une ressource existante")
-                .Produces(200)
-                .Produces(404);
+                var sheet = workbook.AddWorksheet();
+
+                // TODO: Populate the sheet with data
+
+                workbook.Author = "AppName";
+                workbook.SaveAs(stream);
+            }
+            return stream.ToArray();
         }
     }
 }

@@ -1,1 +1,0 @@
-import{l as o}from"./DqJa7-ml.js";function i(){typeof window.platform>"u"&&(window.platform={getServerUrl:()=>"https://localhost:7149"}),typeof window.__app__>"u"&&(window.__app__={},window.__app__.logout=o)}export{i};

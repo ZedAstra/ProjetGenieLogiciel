@@ -1,38 +1,30 @@
 ﻿using Backend.Models;
-using Backend.Models.Communication;
 using Backend.Models.Management;
-using Backend.Models.Planning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace Backend.Modules
 {
-    public class AdminModule
+    public class AdminModule : IModule
     {
-        public static void Setup(WebApplication app)
+        public void Setup(WebApplication app)
         {
-            BuildCRUD(app, typeof(User));
-            BuildCRUD(app, typeof(Tache));
-            BuildCRUD(app, typeof(Cannal));
-            BuildCRUD(app, typeof(Plainte));
-            BuildCRUD(app, typeof(Message));
-            BuildCRUD(app, typeof(Annonce));
-            BuildCRUD(app, typeof(Document));
+            BuildCRUD(app, typeof(Chantier));
+            BuildCRUD(app, typeof(Utilisateur));
             BuildCRUD(app, typeof(Ressource));
+            BuildCRUD(app, typeof(Mouvement));
         }
 
         public static void BuildCRUD(WebApplication app, Type type)
         {
-            Type typeArray = type.MakeArrayType();
+            //Type typeArray = type.MakeArrayType();
+            Type typeArray = typeof(List<>).MakeGenericType(type);
             // All
             Delegate listHandler = Delegate.CreateDelegate(typeof(ListHandler<>).MakeGenericType(type), typeof(AdminModule).GetMethod("List", BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(type));
             app.MapGet($"admin/{type.Name.ToLower()}", listHandler)
@@ -104,14 +96,14 @@ namespace Backend.Modules
             return Results.Json(obj);
         }
 
-        private delegate Task<object> ReadHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] Guid id);
-        private static async Task<object> Read<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, Guid id)
+        private delegate Task<object> ReadHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] int id);
+        private static async Task<object> Read<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, int id)
         {
             return Results.Json(db.Find(typeof(TResult), id));
         }
 
-        private delegate Task<object> UpdateHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] Guid id, [FromBody] TResult obj);
-        private static async Task<object> Update<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, Guid id, TResult obj)
+        private delegate Task<object> UpdateHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] int id, [FromBody] TResult obj);
+        private static async Task<object> Update<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, int id, TResult obj)
         {
             var existing = db.Find(typeof(TResult), id);
             if (existing == null) return Results.NotFound();
@@ -121,8 +113,8 @@ namespace Backend.Modules
             return Results.Json(obj);
         }
 
-        private delegate Task<object> DeleteHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] Guid id);
-        private static async Task<object> Delete<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, Guid id)
+        private delegate Task<object> DeleteHandler<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, [FromRoute] int id);
+        private static async Task<object> Delete<TResult>(HttpContext ctx, TokenProvider tokenProvider, AppDbContext db, int id)
         {
             db.Remove(db.Find(typeof(TResult), id));
             await db.SaveChangesAsync();

@@ -1,8 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-let wails = false;
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
@@ -16,7 +14,8 @@ const config = {
 		adapter: adapter({
 			pages: process.env.PHOTINO ? '../Desktop/Resources/dist' : 'build',
 			assets: process.env.PHOTINO ? '../Desktop/Resources/dist' : 'build',
-		})
+		}),
+		
 	}
 };
 

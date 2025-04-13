@@ -21,6 +21,7 @@ using System.Text.Json.Serialization;
 using System.IO.Compression;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace Backend
 {
@@ -71,9 +72,44 @@ namespace Backend
             builder.Services.AddSingleton<TokenProvider>();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi("v1", options => { options.AddDocumentTransformer<BearerSecuritySchemeTransformer>(); });
+            builder.Services.AddOpenApi("v1", options => { 
+                //options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+                //options.AddSchemaTransformer<SchemaTransformer>();
+            });
             builder.Services.AddCors();
             builder.Services.AddSignalR();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SupportNonNullableReferenceTypes();
+
+                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth" }
+                        },
+                        []
+                    }
+                });
+                options.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "V1 API",
+                        Version = "v1",
+                        Description = "Description",
+                        //TermsOfService = new Uri("https://scalar-swagger-example.com"),
+                    }
+                );
+            });
             
 
             var app = builder.Build();
@@ -91,10 +127,15 @@ namespace Backend
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger(setup =>
+                {
+                    setup.RouteTemplate = "{documentName}/schema.json";
+                });
+                app.MapOpenApi().CacheOutput();
                 app.MapScalarApiReference(opt =>
                 {
-                    opt.HideModels = true;
+                    opt.WithOpenApiRoutePattern("v1/schema.json");
+                    //opt.HideModels = true;
                 });
             }
             // Disable CORS
@@ -103,13 +144,12 @@ namespace Backend
                 .AllowAnyHeader()
                 .AllowAnyOrigin());
 
-            AuthModule.Setup(app);
-            AdminModule.Setup(app);
-            PlanningModule.Setup(app);
-            ManagementModule.Setup(app);
-            CommunicationModule.Setup(app);
+            List<IModule> modules = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => typeof(IModule).IsAssignableFrom(type) && !type.IsAbstract)
+                .Select(type => (IModule)Activator.CreateInstance(type)!)
+                .ToList();
 
-            app.MapHub<CommunicationModule.ChatHub>("communication/hub");
+            foreach (var module in modules) module.Setup(app);
 
             app.UseHttpsRedirection();
 
@@ -125,14 +165,13 @@ namespace Backend
             if (ExeDirectory.GetFiles("app.db").Count() != 1)
             {
                 db.Database.Migrate();
-                db.Users.Add(new User()
+                db.Users.Add(new Utilisateur()
                 {
-                    Id = Guid.NewGuid(),
-                    FirstName = "John",
-                    LastName = "Doe",
+                    Prenom = "John",
+                    Nom = "Doe",
                     Email = "admin",
-                    Password = "changeme",
-                    UserRole = User.Role.Admin
+                    MotDePasse = "changeme",
+                    RoleUtilisateur = Utilisateur.Role.Admin
                 });
                 db.SaveChanges();
                 return [];

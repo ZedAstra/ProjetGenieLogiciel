@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Modules
 {
-    public class AuthModule
+    public class AuthModule : IModule
     {
-        public static void Setup(WebApplication app)
+        public void Setup(WebApplication app)
         {
             app.MapPost("auth/login", async (TokenProvider tokenProvider, AppDbContext db, [FromForm] string login, [FromForm] string password) =>
             {
-                var user = db.Users.Where(user => (user.Email == login || user.FirstName + " " + user.LastName == login) && user.Password == password).FirstOrDefault();
+                var user = db.Users.Where(user => (user.Email == login || user.Prenom + " " + user.Nom == login) && user.MotDePasse == password).FirstOrDefault();
                 if (user == null)
                 {
                     return Results.Unauthorized();
@@ -28,7 +28,7 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status401Unauthorized)
                 .DisableAntiforgery();
 
-            app.MapPost("auth/set_password", async (TokenProvider tokenProvider, AppDbContext db, [FromForm] Guid userId, [FromForm] string newPassword) =>
+            app.MapPost("auth/set_password", async (TokenProvider tokenProvider, AppDbContext db, [FromForm] int userId, [FromForm] string newPassword) =>
             {
                 var user = db.Users.Find(userId);
                 if (user == null)
@@ -37,7 +37,7 @@ namespace Backend.Modules
                 }
                 else
                 {
-                    user.Password = newPassword;
+                    user.MotDePasse = newPassword;
                     await db.SaveChangesAsync();
                     return Results.Ok();
                 }
