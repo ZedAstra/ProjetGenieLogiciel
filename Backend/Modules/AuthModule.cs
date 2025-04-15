@@ -49,6 +49,28 @@ namespace Backend.Modules
                 .WithDescription("Changer le mot de passe de l'utilisateur")
                 .Produces(StatusCodes.Status200OK)
                 .DisableAntiforgery();
+
+            app.MapGet("auth/whoami", async(TokenProvider tokenProvider, AppDbContext db, HttpRequest request) =>
+            {
+                var token = request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                var user = await tokenProvider.GetUser(token, db);
+                if (user == null)
+                {
+                    return Results.Unauthorized();
+                }
+                else
+                {
+                    return Results.Json(user.CompactEntity());
+                }
+            })
+                .RequireAuthorization()
+                .WithTags("Auth")
+                .WithName("auth.whoami")
+                .WithDisplayName("Qui suis-je ?")
+                .WithDescription("Obtenir les informations de l'utilisateur connecté")
+                .Produces<Utilisateur.SafeUtilisateur>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .DisableAntiforgery();
         }
     }
 }

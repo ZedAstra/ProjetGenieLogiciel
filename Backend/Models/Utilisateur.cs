@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -24,7 +25,9 @@ namespace Backend.Models
         public string MotDePasse { get; set; }
         [Required]
         public Role RoleUtilisateur { get; set; }
+        public List<Chantier> Chantiers { get; internal set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum Role
         {
             None,
@@ -40,7 +43,6 @@ namespace Backend.Models
             Name = Name,
             FirstName = Prenom,
             LastName = Nom,
-            Email = Email,
             UserRole = RoleUtilisateur
         };
 
@@ -50,7 +52,6 @@ namespace Backend.Models
             public string Name { get; init; }
             public string FirstName { get; init; }
             public string LastName { get; init; }
-            public string Email { get; init; }
             public Role UserRole { get; init; }
 
             public Utilisateur Expand(DbContext db)

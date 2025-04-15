@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Models.Communication;
+using Backend.Models.Management;
+using Backend.Models.Planning;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
@@ -17,8 +21,15 @@ namespace Backend.Models
         public DateOnly DateDebut { get; set; }
         [Required]
         public StatusChantier Status { get; set; }
-        public List<Utilisateur> Membres { get; set; } = [];
 
+        public List<Utilisateur> Membres { get; set; } = [];
+        public List<Annonce> Annonces { get; set; } = [];
+        public List<Tache> Taches { get; set; } = [];
+        public List<Rapport> Rapports { get; set; } = [];
+        public List<Ressource> Ressources { get; set; } = [];
+        public List<Mouvement> Mouvements { get; set; } = [];
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum StatusChantier
         {
             EnAttente,

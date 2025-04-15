@@ -47,6 +47,7 @@ namespace Backend
                 options.AddPolicy("Ouvrier", policy => policy.RequireRole("Ouvrier"));
 
                 // Aggregates
+                options.AddPolicy("HighAuthority", policy => policy.RequireRole("Admin", "Chef"));
                 options.AddPolicy("Management", policy => policy.RequireRole("Admin", "Chef", "Partenaire"));
             });
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -123,19 +124,19 @@ namespace Backend
             }
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger(setup =>
                 {
                     setup.RouteTemplate = "{documentName}/schema.json";
                 });
                 app.MapOpenApi().CacheOutput();
-                app.MapScalarApiReference(opt =>
+                app.MapScalarApiReference(options =>
                 {
-                    opt.WithOpenApiRoutePattern("v1/schema.json");
-                    //opt.HideModels = true;
+                    options.ForceThemeMode = ThemeMode.Light;
+                    options.WithOpenApiRoutePattern("v1/schema.json");
                 });
-            }
+            //}
             // Disable CORS
             app.UseCors(options => options
                 .AllowAnyMethod()

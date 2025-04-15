@@ -17,6 +17,7 @@ namespace Backend.Modules
             {
                 return await db.Chantiers
                     .AsNoTracking()
+                    .Include(c => c.Membres)
                     .Select(ch => ch.CompactEntity())
                     .ToListAsync();
             })
@@ -29,21 +30,45 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status403Forbidden)
                 .Produces(StatusCodes.Status500InternalServerError);
 
-            app.MapPost("app/projects/create", async (AppDbContext db, [FromForm] CreateChantierForm form) =>
+            app.MapGet("app/projects/{id}", async (AppDbContext db, int id) =>
             {
+                var chantier = await db.Chantiers.FindAsync(id);
+                if(chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                var membres = await db.Utilisateurs
+                    .Include(u => u.Chantiers)
+                    .Where(u => u.Chantiers.Any(c => c.Id == chantier.Id))
+                    .Select(u => u.CompactEntity())
+                    .ToListAsync();
+                return Results.Ok(membres);
+            })
+                .RequireAuthorization()
+                .WithName("GetChantierById")
+                .WithTags("App")
+                .WithDescription("Obtenir un chantier par son ID")
+                .Produces<Chantier.CompactChantier>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            app.MapPost("app/projects/create", async(
+                AppDbContext db,
+                [FromForm] CreateChantierForm form) =>
+            {
+                var membresEntities = await db.Utilisateurs.Where(u => form.membres.Contains(u.Id)).ToListAsync();
                 var chantier = new Chantier
                 {
-                    Nom = form.Nom,
-                    Details = form.Details,
-                    DateDebut = form.DateDebut,
-                    Status = form.Status,
-                    Membres = await db.Utilisateurs.Where(u => form.Membres.Contains(u.Id)).ToListAsync()
+                    Nom = form.nom,
+                    Details = form.details,
+                    DateDebut = form.dateDebut,
+                    Status = form.status,
+                    Membres = membresEntities,
                 };
                 db.Chantiers.Add(chantier);
                 await db.SaveChangesAsync();
                 return Results.Created($"/app/projects/{chantier.Id}", chantier.CompactEntity());
             })
-                .RequireAuthorization("Admin", "Chef")
+                .RequireAuthorization("HighAuthority")
                 .WithName("CreateChantier")
                 .WithTags("App")
                 .WithDescription("Créer un nouveau chantier")
@@ -51,15 +76,81 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status400BadRequest)
                 .Produces(StatusCodes.Status401Unauthorized)
                 .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError)
+                .DisableAntiforgery();
+
+            app.MapPut("app/projects/{id}", async(
+                AppDbContext db,
+                int id,
+                [FromForm] string? nom,
+                [FromForm] string? details,
+                [FromForm] Chantier.StatusChantier? status) =>
+            {
+                var chantier = await db.Chantiers.FindAsync(id);
+                if (chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                if (nom != null) chantier.Nom = nom;
+                if (details != null) chantier.Details = details;
+                if(status != null) chantier.Status = status.Value;
+                db.Chantiers.Update(chantier);
+                await db.SaveChangesAsync();
+                return Results.Ok(chantier.CompactEntity());
+            })
+                .RequireAuthorization("HighAuthority")
+                .WithName("UpdateChantier")
+                .WithTags("App")
+                .WithDescription("Mettre à jour un chantier")
+                .Produces<Chantier.CompactChantier>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError)
+                .DisableAntiforgery();
+
+            app.MapDelete("app/projects/{id}", async (AppDbContext db, int id) =>
+            {
+                var chantier = await db.Chantiers.FindAsync(id);
+                if (chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                db.Annonces.Where(a => a.ChantierId == chantier.Id).ToList().ForEach(a => db.Annonces.Remove(a));
+                db.Taches.Where(t => t.ChantierId == chantier.Id).ToList().ForEach(t => db.Taches.Remove(t));
+                db.Rapports.Where(r => r.ChantierId == chantier.Id).ToList().ForEach(r => db.Rapports.Remove(r));
+                db.Ressources.Where(r => r.ChantierId == chantier.Id).ToList().ForEach(r => db.Ressources.Remove(r));
+                db.Mouvements.Where(m => m.ChantierId == chantier.Id).ToList().ForEach(m => db.Mouvements.Remove(m));
+                db.Chantiers.Remove(chantier);
+                await db.SaveChangesAsync();
+                return Results.NoContent();
+            })
+                .RequireAuthorization("HighAuthority")
+                .WithName("DeleteChantier")
+                .WithTags("App")
+                .WithDescription("Supprimer un chantier")
+                .Produces(StatusCodes.Status204NoContent)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
                 .Produces(StatusCodes.Status500InternalServerError);
+
+            app.MapGet("app/everyone", async (AppDbContext db) =>
+            {
+                return Results.Ok(db.Utilisateurs.Select(u => u.CompactEntity()));
+            })
+                .RequireAuthorization()
+                .WithTags("App")
+                .WithName("GetAllUsers")
+                .WithDescription("Lister tous les utilisateurs")
+                .Produces<List<Utilisateur.SafeUtilisateur>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
         }
 
         public record CreateChantierForm(
-            string Nom,
-            string Details,
-            DateOnly DateDebut,
-            Chantier.StatusChantier Status,
-            List<int> Membres
+            string nom,
+            string details,
+            DateOnly dateDebut,
+            Chantier.StatusChantier status,
+            List<int> membres
         );
     }
 }

@@ -13,6 +13,7 @@ namespace Backend.Models.Management
         public decimal Quantite { get; set; }
         public TypeMouvement Type { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum TypeMouvement
         {
             Entrée,
@@ -21,7 +22,7 @@ namespace Backend.Models.Management
 
         public CompactMouvement CompactEntity() => new()
         {
-            Resource = Ressource.Id,
+            Resource = RessourceId,
             Description = Description,
             Id = Id,
             Date = Date,

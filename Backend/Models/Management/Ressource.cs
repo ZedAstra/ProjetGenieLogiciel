@@ -18,8 +18,7 @@ namespace Backend.Models.Management
             // Get all mouvements for this ressource and sort them by date
             var mouvements = db.Mouvements
                 .Include(m => m.Ressource)
-                .Include(m => m.Chantier)
-                .Where(m => m.Ressource.Id == Id && m.Chantier.Id == Chantier.Id)
+                .Where(m => m.Ressource.Id == Id && m.ChantierId == ChantierId)
                 .OrderBy(m => m.Date)
                 .ToList();
             // Calculate the total quantity
@@ -40,7 +39,7 @@ namespace Backend.Models.Management
 
         public CompactRessource CompactEntity(AppDbContext db) => new()
         {
-            Chantier = Chantier.Id,
+            Chantier = ChantierId,
             Id = Id,
             Nom = Nom,
             Unite = Unite,

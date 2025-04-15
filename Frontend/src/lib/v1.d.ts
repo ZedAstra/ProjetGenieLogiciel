@@ -233,6 +233,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/app/projects/{id}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Obtenir un chantier par son ID */
+        get: operations["GetChantierById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/app/projects/create": {
         parameters: {
             query?: never;
@@ -244,6 +261,41 @@ export interface paths {
         put?: never;
         /** @description Créer un nouveau chantier */
         post: operations["CreateChantier"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/app/projects/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** @description Mettre à jour un chantier */
+        put: operations["UpdateChantier"];
+        post?: never;
+        /** @description Supprimer un chantier */
+        delete: operations["DeleteChantier"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/app/everyone": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lister tous les utilisateurs */
+        get: operations["GetAllUsers"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -278,6 +330,74 @@ export interface paths {
         put?: never;
         /** @description Changer le mot de passe de l'utilisateur */
         post: operations["auth.change_password"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/whoami": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Obtenir les informations de l'utilisateur connecté */
+        get: operations["auth.whoami"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/communication/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les annonces d'un chantier */
+        get: operations["GetChantierNews"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/communication/news/{newsId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer une annonce d'un chantier par son identifiant */
+        get: operations["GetChantierNewsById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/communication/news/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer une annonce pour un chantier */
+        post: operations["CreateChantierNews"];
         delete?: never;
         options?: never;
         head?: never;
@@ -329,7 +449,8 @@ export interface paths {
         get: operations["GetResourceById"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** @description Supprimer une ressource spécifique */
+        delete: operations["DeleteResource"];
         options?: never;
         head?: never;
         patch?: never;
@@ -380,7 +501,8 @@ export interface paths {
         get: operations["GetMovementById"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** @description Supprimer un mouvement spécifique d'une ressource */
+        delete: operations["DeleteMovement"];
         options?: never;
         head?: never;
         patch?: never;
@@ -420,10 +542,158 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/chantier/{chantierId}/management/rh/addMember": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** @description Ajouter un membre à un chantier */
+        put: operations["AddMember"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les tâches d'un chantier */
+        get: operations["GetChantierTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer une tâche pour un chantier */
+        post: operations["CreateTask"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/{taskId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** @description Mettre à jour une tâche d'un chantier */
+        put: operations["UpdateTask"];
+        post?: never;
+        /** @description Supprimer une tâche d'un chantier */
+        delete: operations["DeleteTask"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/planned": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les tâches planifiées d'un chantier */
+        get: operations["GetPlannedTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/ongoing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les tâches en cours d'un chantier */
+        get: operations["GetOngoingTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/completed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les tâches terminées d'un chantier */
+        get: operations["GetCompletedTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/planning/tasks/cancelled": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récupérer les tâches annulées d'un chantier */
+        get: operations["GetCancelledTasks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Annonce: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            chantierId?: number;
+            titre?: string;
+            description?: string;
+            /** Format: date-time */
+            date?: string;
+            contenu?: string;
+        };
         Chantier: {
             /** Format: int32 */
             id?: number;
@@ -433,6 +703,11 @@ export interface components {
             dateDebut: string;
             status: components["schemas"]["StatusChantier"];
             membres?: components["schemas"]["Utilisateur"][];
+            annonces?: components["schemas"]["Annonce"][];
+            taches?: components["schemas"]["Tache"][];
+            rapports?: components["schemas"]["Rapport"][];
+            ressources?: components["schemas"]["Ressource"][];
+            mouvements?: components["schemas"]["Mouvement"][];
         };
         CompactChantier: {
             /** Format: int32 */
@@ -474,25 +749,13 @@ export interface components {
             status?: components["schemas"]["StatusChantier"];
             membres?: number[];
         };
-        CreateMovementForm: {
-            /** Format: int32 */
-            resourceId?: number;
-            /** Format: date-time */
-            date?: string;
-            /** Format: double */
-            quantite?: number;
-            type?: components["schemas"]["TypeMouvement"];
-        };
-        CreateResourceForm: {
-            nom?: string;
-            unite?: string;
-        };
+        /** @enum {string} */
+        EtatTache: "NonCommencee" | "EnCours" | "Terminee" | "Annulee";
         Mouvement: {
             /** Format: int32 */
-            chantierId?: number;
-            chantier?: components["schemas"]["Chantier"];
-            /** Format: int32 */
             id?: number;
+            /** Format: int32 */
+            chantierId?: number;
             /** Format: int32 */
             ressourceId?: number;
             ressource?: components["schemas"]["Ressource"];
@@ -503,30 +766,53 @@ export interface components {
             quantite?: number;
             type?: components["schemas"]["TypeMouvement"];
         };
-        Ressource: {
-            /** Format: int32 */
-            chantierId?: number;
-            chantier?: components["schemas"]["Chantier"];
+        Rapport: {
             /** Format: int32 */
             id?: number;
+            /** Format: int32 */
+            chantierId?: number;
+            /** Format: int32 */
+            annee?: number;
+            /** Format: int32 */
+            mois?: number;
+            /** Format: byte */
+            fichier?: string | null;
+        };
+        Ressource: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            chantierId?: number;
             nom: string;
             unite: string;
         };
-        /**
-         * Format: int32
-         * @enum {integer}
-         */
-        Role: 0 | 1 | 2 | 3 | 4;
-        /**
-         * Format: int32
-         * @enum {integer}
-         */
-        StatusChantier: 0 | 1 | 2 | 3;
-        /**
-         * Format: int32
-         * @enum {integer}
-         */
-        TypeMouvement: 0 | 1;
+        /** @enum {string} */
+        Role: "None" | "Admin" | "Chef" | "Partenaire" | "Ouvrier";
+        SafeUtilisateur: {
+            /** Format: int32 */
+            id?: number;
+            name?: string;
+            firstName?: string;
+            lastName?: string;
+            userRole?: components["schemas"]["Role"];
+        };
+        /** @enum {string} */
+        StatusChantier: "EnAttente" | "EnCours" | "Terminé" | "Annulé";
+        Tache: {
+            /** Format: int32 */
+            id?: number;
+            /** Format: int32 */
+            chantierId?: number;
+            titre?: string;
+            description?: string;
+            /** Format: date-time */
+            dateDebut?: string;
+            /** Format: date-time */
+            dateFin?: string;
+            status?: components["schemas"]["EtatTache"];
+        };
+        /** @enum {string} */
+        TypeMouvement: "Entrée" | "Sortie";
         Utilisateur: {
             /**
              * Format: int32
@@ -538,6 +824,7 @@ export interface components {
             email: string;
             motDePasse: string;
             roleUtilisateur: components["schemas"]["Role"];
+            readonly chantiers?: components["schemas"]["Chantier"][];
         };
     };
     responses: never;
@@ -1177,6 +1464,56 @@ export interface operations {
             };
         };
     };
+    GetChantierById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactChantier"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     CreateChantier: {
         parameters: {
             query?: never;
@@ -1206,6 +1543,165 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UpdateChantier: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    nom?: string;
+                    details?: string;
+                    status?: components["schemas"]["StatusChantier"];
+                };
+                "application/x-www-form-urlencoded": {
+                    nom?: string;
+                    details?: string;
+                    status?: components["schemas"]["StatusChantier"];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactChantier"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DeleteChantier: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetAllUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SafeUtilisateur"][];
+                };
             };
             /** @description Unauthorized */
             401: {
@@ -1299,6 +1795,163 @@ export interface operations {
             };
         };
     };
+    "auth.whoami": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SafeUtilisateur"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetChantierNews: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Annonce"][];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetChantierNewsById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de l'annonce */
+                newsId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Annonce"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateChantierNews: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    titre: string;
+                    description: string;
+                    /** Format: date-time */
+                    date: string;
+                    content: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    titre: string;
+                    description: string;
+                    /** Format: date-time */
+                    date: string;
+                    content: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Annonce"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     GetAllResources: {
         parameters: {
             query?: never;
@@ -1362,8 +2015,14 @@ export interface operations {
         };
         requestBody?: {
             content: {
-                "multipart/form-data": components["schemas"]["CreateResourceForm"];
-                "application/x-www-form-urlencoded": components["schemas"]["CreateResourceForm"];
+                "multipart/form-data": {
+                    nom: string;
+                    unite: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    nom: string;
+                    unite: string;
+                };
             };
         };
         responses: {
@@ -1466,6 +2125,57 @@ export interface operations {
             };
         };
     };
+    DeleteResource: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la ressource */
+                resourceId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     GetResourceMovements: {
         parameters: {
             query?: never;
@@ -1533,8 +2243,22 @@ export interface operations {
         };
         requestBody?: {
             content: {
-                "multipart/form-data": components["schemas"]["CreateMovementForm"];
-                "application/x-www-form-urlencoded": components["schemas"]["CreateMovementForm"];
+                "multipart/form-data": {
+                    description: string;
+                    /** Format: date-time */
+                    date: string;
+                    /** Format: double */
+                    quantite: number;
+                    type: components["schemas"]["TypeMouvement"];
+                };
+                "application/x-www-form-urlencoded": {
+                    description: string;
+                    /** Format: date-time */
+                    date: string;
+                    /** Format: double */
+                    quantite: number;
+                    type: components["schemas"]["TypeMouvement"];
+                };
             };
         };
         responses: {
@@ -1606,6 +2330,59 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["CompactMouvement"];
                 };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DeleteMovement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la ressource */
+                resourceId: number;
+                /** @description L'identifiant du mouvement */
+                movementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Unauthorized */
             401: {
@@ -1732,6 +2509,473 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    AddMember: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: int32 */
+                    userId: number;
+                };
+                "application/x-www-form-urlencoded": {
+                    /** Format: int32 */
+                    userId: number;
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetChantierTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateTask: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    titre: string;
+                    description: string;
+                    /** Format: date-time */
+                    dateDebut: string;
+                    /** Format: date-time */
+                    dateFin: string;
+                };
+                "application/x-www-form-urlencoded": {
+                    titre: string;
+                    description: string;
+                    /** Format: date-time */
+                    dateDebut: string;
+                    /** Format: date-time */
+                    dateFin: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    UpdateTask: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la tâche */
+                taskId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": {
+                    titre?: string;
+                    description?: string;
+                    status: components["schemas"]["EtatTache"];
+                };
+                "application/x-www-form-urlencoded": {
+                    titre?: string;
+                    description?: string;
+                    status: components["schemas"]["EtatTache"];
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    DeleteTask: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la tâche */
+                taskId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetPlannedTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetOngoingTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetCompletedTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetCancelledTasks: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Tache"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
                 headers: {
                     [name: string]: unknown;
                 };

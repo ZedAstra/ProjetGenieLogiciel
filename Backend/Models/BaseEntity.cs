@@ -1,13 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Backend.Models
 {
-    [PrimaryKey(nameof(ChantierId), nameof(Id))]
-    public abstract class BaseEntity
+    public class BaseEntity
     {
-        public int ChantierId { get; set; }
-        public Chantier Chantier { get; set; }
+        [Key]
         public int Id { get; set; }
+        public int ChantierId { get; set; }
+        [JsonIgnore]
+        public Chantier Chantier { get; set; }
+        
     }
 }
