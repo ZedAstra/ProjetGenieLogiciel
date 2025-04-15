@@ -20,10 +20,15 @@ namespace Backend.Models
             modelBuilder.Entity<Mouvement>().Property(mouvement => mouvement.Type).HasConversion<string>();
         }
 
-        public DbSet<Utilisateur> Users { get; set; }
+        public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Chantier> Chantiers { get; set; }
+        #region Management
         public DbSet<Ressource> Ressources { get; set; }
         public DbSet<Mouvement> Mouvements { get; set; }
         public DbSet<Rapport> Rapports { get; set; }
+        #endregion Management
+        #region Communication
+        //
+        #endregion Communication
     }
 }

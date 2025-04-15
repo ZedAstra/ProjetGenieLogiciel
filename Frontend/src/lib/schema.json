@@ -1,0 +1,1711 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "V1 API",
+    "description": "Description",
+    "version": "v1"
+  },
+  "paths": {
+    "/admin/chantier": {
+      "get": {
+        "tags": [
+          "Admin/Chantier"
+        ],
+        "description": "Lister les objets de type 'Chantier'",
+        "operationId": "admin.chantier.list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Chantier"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/chantier/create": {
+      "post": {
+        "tags": [
+          "Admin/Chantier"
+        ],
+        "description": "Créer un nouvel objet de type 'Chantier'",
+        "operationId": "admin.chantier.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chantier"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chantier"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/chantier/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Chantier"
+        ],
+        "description": "Récuperer l'objet de type 'Chantier' spécifié",
+        "operationId": "admin.chantier.read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chantier"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin/Chantier"
+        ],
+        "description": "Modifier l'objet de type 'Chantier' spécifié",
+        "operationId": "admin.chantier.update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chantier"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chantier"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin/Chantier"
+        ],
+        "description": "Supprimer l'objet de type 'Chantier' spécifié",
+        "operationId": "admin.chantier.delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/mouvement": {
+      "get": {
+        "tags": [
+          "Admin/Mouvement"
+        ],
+        "description": "Lister les objets de type 'Mouvement'",
+        "operationId": "admin.mouvement.list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Mouvement"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/mouvement/create": {
+      "post": {
+        "tags": [
+          "Admin/Mouvement"
+        ],
+        "description": "Créer un nouvel objet de type 'Mouvement'",
+        "operationId": "admin.mouvement.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mouvement"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mouvement"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/mouvement/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Mouvement"
+        ],
+        "description": "Récuperer l'objet de type 'Mouvement' spécifié",
+        "operationId": "admin.mouvement.read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mouvement"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin/Mouvement"
+        ],
+        "description": "Modifier l'objet de type 'Mouvement' spécifié",
+        "operationId": "admin.mouvement.update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mouvement"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mouvement"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin/Mouvement"
+        ],
+        "description": "Supprimer l'objet de type 'Mouvement' spécifié",
+        "operationId": "admin.mouvement.delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/ressource": {
+      "get": {
+        "tags": [
+          "Admin/Ressource"
+        ],
+        "description": "Lister les objets de type 'Ressource'",
+        "operationId": "admin.ressource.list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ressource"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/ressource/create": {
+      "post": {
+        "tags": [
+          "Admin/Ressource"
+        ],
+        "description": "Créer un nouvel objet de type 'Ressource'",
+        "operationId": "admin.ressource.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ressource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ressource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/ressource/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Ressource"
+        ],
+        "description": "Récuperer l'objet de type 'Ressource' spécifié",
+        "operationId": "admin.ressource.read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ressource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin/Ressource"
+        ],
+        "description": "Modifier l'objet de type 'Ressource' spécifié",
+        "operationId": "admin.ressource.update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ressource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ressource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin/Ressource"
+        ],
+        "description": "Supprimer l'objet de type 'Ressource' spécifié",
+        "operationId": "admin.ressource.delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/utilisateur": {
+      "get": {
+        "tags": [
+          "Admin/Utilisateur"
+        ],
+        "description": "Lister les objets de type 'Utilisateur'",
+        "operationId": "admin.utilisateur.list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Utilisateur"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/utilisateur/create": {
+      "post": {
+        "tags": [
+          "Admin/Utilisateur"
+        ],
+        "description": "Créer un nouvel objet de type 'Utilisateur'",
+        "operationId": "admin.utilisateur.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Utilisateur"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Utilisateur"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/admin/utilisateur/{id}": {
+      "get": {
+        "tags": [
+          "Admin/Utilisateur"
+        ],
+        "description": "Récuperer l'objet de type 'Utilisateur' spécifié",
+        "operationId": "admin.utilisateur.read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Utilisateur"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admin/Utilisateur"
+        ],
+        "description": "Modifier l'objet de type 'Utilisateur' spécifié",
+        "operationId": "admin.utilisateur.update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Utilisateur"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Utilisateur"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin/Utilisateur"
+        ],
+        "description": "Supprimer l'objet de type 'Utilisateur' spécifié",
+        "operationId": "admin.utilisateur.delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/app/projects": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "description": "Lister tous les chantiers",
+        "operationId": "GetAllChantiers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompactChantier"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/app/projects/create": {
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "description": "Créer un nouveau chantier",
+        "operationId": "CreateChantier",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChantierForm"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChantierForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompactChantier"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Connexion à application",
+        "operationId": "auth.login",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "login",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "login": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "login": {
+                  "style": "form"
+                },
+                "password": {
+                  "style": "form"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "login",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "login": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "login": {
+                  "style": "form"
+                },
+                "password": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/set_password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Changer le mot de passe de l'utilisateur",
+        "operationId": "auth.change_password",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "newPassword",
+                  "userId"
+                ],
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "userId": {
+                  "style": "form"
+                },
+                "newPassword": {
+                  "style": "form"
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "required": [
+                  "newPassword",
+                  "userId"
+                ],
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "userId": {
+                  "style": "form"
+                },
+                "newPassword": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Lister toutes les ressources du chantier",
+        "operationId": "GetAllResources",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompactRessource"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources/create": {
+      "post": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Créer une nouvelle ressource",
+        "operationId": "CreateResource",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResourceForm"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateResourceForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompactRessource"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources/{resourceId}": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Obtenir une ressource spécifique",
+        "operationId": "GetResourceById",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "L'identifiant de la ressource",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant de la ressource",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompactRessource"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Lister tous les mouvements d'une ressource spécifique",
+        "operationId": "GetResourceMovements",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "L'identifiant de la ressource",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant de la ressource",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompactMouvement"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements/create": {
+      "post": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Créer un nouveau mouvement pour une ressource spécifique",
+        "operationId": "CreateMovement",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "L'identifiant de la ressource",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant de la ressource",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementForm"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompactMouvement"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements/{movementId}": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Obtenir un mouvement spécifique d'une ressource spécifiée",
+        "operationId": "GetMovementById",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "movementId",
+            "in": "path",
+            "description": "L'identifiant du mouvement",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du mouvement",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompactMouvement"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/report/{annee}/{mois}": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Obtenir un rapport pour le mois et l'année spécifiés",
+        "operationId": "GetReport",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mois",
+            "in": "path",
+            "description": "Mois",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Mois",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "annee",
+            "in": "path",
+            "description": "Année",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Année",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/chantier/{chantierId}/management/generate_report": {
+      "post": {
+        "tags": [
+          "Management"
+        ],
+        "description": "Générer un rapport pour le mois et l'année spécifiés",
+        "operationId": "GenerateReport",
+        "parameters": [
+          {
+            "name": "chantierId",
+            "in": "path",
+            "description": "L'identifiant du chantier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "L'identifiant du chantier",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "mois",
+            "in": "query",
+            "description": "Mois",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Mois",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "annee",
+            "in": "query",
+            "description": "Année",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Année",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Chantier": {
+        "required": [
+          "dateDebut",
+          "details",
+          "nom",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "details": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "dateDebut": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusChantier"
+          },
+          "membres": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Utilisateur"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompactChantier": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "dateDebut": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusChantier"
+          },
+          "membres": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompactMouvement": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quantite": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeMouvement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompactRessource": {
+        "type": "object",
+        "properties": {
+          "chantier": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "unite": {
+            "type": "string"
+          },
+          "quantite": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateChantierForm": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "dateDebut": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusChantier"
+          },
+          "membres": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMovementForm": {
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quantite": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeMouvement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateResourceForm": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "unite": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Mouvement": {
+        "type": "object",
+        "properties": {
+          "chantierId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chantier": {
+            "$ref": "#/components/schemas/Chantier"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ressourceId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ressource": {
+            "$ref": "#/components/schemas/Ressource"
+          },
+          "description": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "quantite": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TypeMouvement"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ressource": {
+        "required": [
+          "nom",
+          "unite"
+        ],
+        "type": "object",
+        "properties": {
+          "chantierId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chantier": {
+            "$ref": "#/components/schemas/Chantier"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nom": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "unite": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Role": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "StatusChantier": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TypeMouvement": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Utilisateur": {
+        "required": [
+          "email",
+          "motDePasse",
+          "nom",
+          "prenom",
+          "roleUtilisateur"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Ignorer lors de la création d'un utilisateur",
+            "format": "int32"
+          },
+          "prenom": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "nom": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "motDePasse": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "roleUtilisateur": {
+            "$ref": "#/components/schemas/Role"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": [ ]
+    }
+  ]
+}

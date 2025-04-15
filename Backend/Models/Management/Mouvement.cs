@@ -8,6 +8,7 @@ namespace Backend.Models.Management
     {
         public int RessourceId { get; set; }
         public Ressource Ressource { get; set; } = null!;
+        public string Description { get; set; } = string.Empty;
         public DateTime Date { get; set; }
         public decimal Quantite { get; set; }
         public TypeMouvement Type { get; set; }
@@ -21,6 +22,7 @@ namespace Backend.Models.Management
         public CompactMouvement CompactEntity() => new()
         {
             Resource = Ressource.Id,
+            Description = Description,
             Id = Id,
             Date = Date,
             Quantite = Quantite,
@@ -30,6 +32,7 @@ namespace Backend.Models.Management
         public class CompactMouvement
         {
             public int Resource { get; init; }
+            public string Description { get; init; } = string.Empty;
             public int Id { get; init; }
             public DateTime Date { get; init; }
             public decimal Quantite { get; init; }

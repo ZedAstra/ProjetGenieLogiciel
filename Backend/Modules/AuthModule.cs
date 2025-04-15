@@ -13,12 +13,12 @@ namespace Backend.Modules
         {
             app.MapPost("auth/login", async (TokenProvider tokenProvider, AppDbContext db, [FromForm] string login, [FromForm] string password) =>
             {
-                var user = db.Users.Where(user => (user.Email == login || user.Prenom + " " + user.Nom == login) && user.MotDePasse == password).FirstOrDefault();
+                var user = db.Utilisateurs.Where(user => (user.Email == login || user.Prenom + " " + user.Nom == login) && user.MotDePasse == password).FirstOrDefault();
                 if (user == null)
                 {
                     return Results.Unauthorized();
                 }
-                else return Results.Text(await tokenProvider.Create(user!));
+                else return Results.Json(await tokenProvider.Create(user!));
             })
                 .WithTags("Auth")
                 .WithName("auth.login")
@@ -30,7 +30,7 @@ namespace Backend.Modules
 
             app.MapPost("auth/set_password", async (TokenProvider tokenProvider, AppDbContext db, [FromForm] int userId, [FromForm] string newPassword) =>
             {
-                var user = db.Users.Find(userId);
+                var user = db.Utilisateurs.Find(userId);
                 if (user == null)
                 {
                     return Results.NotFound();

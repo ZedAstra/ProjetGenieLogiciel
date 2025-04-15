@@ -53,7 +53,7 @@ namespace Backend.Models
                 {
                     return null;
                 }
-                return await context.Users.FindAsync(int.Parse(id));
+                return await context.Utilisateurs.FindAsync(int.Parse(id));
             }
             else
             {

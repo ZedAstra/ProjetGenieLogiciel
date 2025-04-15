@@ -13,15 +13,13 @@ using Scalar.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Text.Json.Serialization;
 using System.IO.Compression;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Backend
 {
@@ -165,7 +163,7 @@ namespace Backend
             if (ExeDirectory.GetFiles("app.db").Count() != 1)
             {
                 db.Database.Migrate();
-                db.Users.Add(new Utilisateur()
+                db.Utilisateurs.Add(new Utilisateur()
                 {
                     Prenom = "John",
                     Nom = "Doe",
@@ -233,6 +231,7 @@ namespace Backend
                 archive.CreateEntry("migrations.txt").Open().Write(Encoding.UTF8.GetBytes(string.Join('\n', migrations)));
             }
         }
+        
         internal sealed class BearerSecuritySchemeTransformer(Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider authenticationSchemeProvider) : IOpenApiDocumentTransformer
         {
             public async Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context, CancellationToken cancellationToken)

@@ -4,59 +4,6 @@
  */
 
 export interface paths {
-    "/admin/user": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Lister les objets de type 'User' */
-        get: operations["admin.user.list"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/admin/user/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** @description Créer un nouvel objet de type 'User' */
-        post: operations["admin.user.create"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/admin/user/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Récuperer l'objet de type 'User' spécifié */
-        get: operations["admin.user.read"];
-        /** @description Modifier l'objet de type 'User' spécifié */
-        put: operations["admin.user.update"];
-        post?: never;
-        /** @description Supprimer l'objet de type 'User' spécifié */
-        delete: operations["admin.user.delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/admin/chantier": {
         parameters: {
             query?: never;
@@ -105,59 +52,6 @@ export interface paths {
         post?: never;
         /** @description Supprimer l'objet de type 'Chantier' spécifié */
         delete: operations["admin.chantier.delete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/admin/ressource": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Lister les objets de type 'Ressource' */
-        get: operations["admin.ressource.list"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/admin/ressource/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** @description Créer un nouvel objet de type 'Ressource' */
-        post: operations["admin.ressource.create"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/admin/ressource/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Récuperer l'objet de type 'Ressource' spécifié */
-        get: operations["admin.ressource.read"];
-        /** @description Modifier l'objet de type 'Ressource' spécifié */
-        put: operations["admin.ressource.update"];
-        post?: never;
-        /** @description Supprimer l'objet de type 'Ressource' spécifié */
-        delete: operations["admin.ressource.delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -216,6 +110,146 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/ressource": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lister les objets de type 'Ressource' */
+        get: operations["admin.ressource.list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/ressource/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer un nouvel objet de type 'Ressource' */
+        post: operations["admin.ressource.create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/ressource/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récuperer l'objet de type 'Ressource' spécifié */
+        get: operations["admin.ressource.read"];
+        /** @description Modifier l'objet de type 'Ressource' spécifié */
+        put: operations["admin.ressource.update"];
+        post?: never;
+        /** @description Supprimer l'objet de type 'Ressource' spécifié */
+        delete: operations["admin.ressource.delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/utilisateur": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lister les objets de type 'Utilisateur' */
+        get: operations["admin.utilisateur.list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/utilisateur/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer un nouvel objet de type 'Utilisateur' */
+        post: operations["admin.utilisateur.create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/utilisateur/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Récuperer l'objet de type 'Utilisateur' spécifié */
+        get: operations["admin.utilisateur.read"];
+        /** @description Modifier l'objet de type 'Utilisateur' spécifié */
+        put: operations["admin.utilisateur.update"];
+        post?: never;
+        /** @description Supprimer l'objet de type 'Utilisateur' spécifié */
+        delete: operations["admin.utilisateur.delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/app/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lister tous les chantiers */
+        get: operations["GetAllChantiers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/app/projects/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer un nouveau chantier */
+        post: operations["CreateChantier"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/auth/login": {
         parameters: {
             query?: never;
@@ -257,10 +291,27 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** @description Get all resources */
+        /** @description Lister toutes les ressources du chantier */
         get: operations["GetAllResources"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/resources/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer une nouvelle ressource */
+        post: operations["CreateResource"];
         delete?: never;
         options?: never;
         head?: never;
@@ -274,10 +325,95 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** @description Get a resource by id */
+        /** @description Obtenir une ressource spécifique */
         get: operations["GetResourceById"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lister tous les mouvements d'une ressource spécifique */
+        get: operations["GetResourceMovements"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Créer un nouveau mouvement pour une ressource spécifique */
+        post: operations["CreateMovement"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/resources/{resourceId}/movements/{movementId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Obtenir un mouvement spécifique d'une ressource spécifiée */
+        get: operations["GetMovementById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/report/{annee}/{mois}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Obtenir un rapport pour le mois et l'année spécifiés */
+        get: operations["GetReport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/chantier/{chantierId}/management/generate_report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Générer un rapport pour le mois et l'année spécifiés */
+        post: operations["GenerateReport"];
         delete?: never;
         options?: never;
         head?: never;
@@ -296,39 +432,31 @@ export interface components {
             /** Format: date */
             dateDebut: string;
             status: components["schemas"]["StatusChantier"];
-            membres?: components["schemas"]["User"][];
+            membres?: components["schemas"]["Utilisateur"][];
         };
-        Chantier2: {
+        CompactChantier: {
             /** Format: int32 */
             id?: number;
-            nom: string;
-            details: string;
+            nom?: string;
+            details?: string;
             /** Format: date */
-            dateDebut: string;
-            status: components["schemas"]["StatusChantier"];
-            membres?: components["schemas"]["User"][];
-        } | null;
-        Chantier3: {
+            dateDebut?: string;
+            status?: components["schemas"]["StatusChantier"];
+            membres?: number[];
+        };
+        CompactMouvement: {
+            /** Format: int32 */
+            resource?: number;
+            description?: string;
             /** Format: int32 */
             id?: number;
-            nom: string;
-            details: string;
-            /** Format: date */
-            dateDebut: string;
-            status: components["schemas"]["StatusChantier"];
-            membres?: components["schemas"];
+            /** Format: date-time */
+            date?: string;
+            /** Format: double */
+            quantite?: number;
+            type?: components["schemas"]["TypeMouvement"];
         };
-        Chantier4: {
-            /** Format: int32 */
-            id?: number;
-            nom: string;
-            details: string;
-            /** Format: date */
-            dateDebut: string;
-            status: components["schemas"]["StatusChantier"];
-            membres?: components["schemas"];
-        };
-        Compact: {
+        CompactRessource: {
             /** Format: int32 */
             chantier?: number;
             /** Format: int32 */
@@ -338,92 +466,79 @@ export interface components {
             /** Format: double */
             quantite?: number;
         };
+        CreateChantierForm: {
+            nom?: string;
+            details?: string;
+            /** Format: date */
+            dateDebut?: string;
+            status?: components["schemas"]["StatusChantier"];
+            membres?: number[];
+        };
+        CreateMovementForm: {
+            /** Format: int32 */
+            resourceId?: number;
+            /** Format: date-time */
+            date?: string;
+            /** Format: double */
+            quantite?: number;
+            type?: components["schemas"]["TypeMouvement"];
+        };
+        CreateResourceForm: {
+            nom?: string;
+            unite?: string;
+        };
         Mouvement: {
             /** Format: int32 */
-            ressourceId?: number;
-            ressource?: components["schemas"]["Ressource"];
-            /** Format: double */
-            quantite?: number;
-            /** Format: int32 */
             chantierId?: number;
-            chantier?: components["schemas"]["Chantier3"];
+            chantier?: components["schemas"]["Chantier"];
             /** Format: int32 */
             id?: number;
+            /** Format: int32 */
+            ressourceId?: number;
+            ressource?: components["schemas"]["Ressource"];
+            description?: string;
+            /** Format: date-time */
+            date?: string;
+            /** Format: double */
+            quantite?: number;
+            type?: components["schemas"]["TypeMouvement"];
         };
-        Mouvement2: {
-            /** Format: int32 */
-            ressourceId?: number;
-            ressource?: components["schemas"]["Ressource"];
-            /** Format: double */
-            quantite?: number;
-            /** Format: int32 */
-            chantierId?: number;
-            chantier?: components["schemas"]["Chantier4"];
-            /** Format: int32 */
-            id?: number;
-        };
-        Mouvement3: {
-            /** Format: int32 */
-            ressourceId?: number;
-            ressource?: components["schemas"]["Ressource"];
-            /** Format: double */
-            quantite?: number;
-            /** Format: int32 */
-            chantierId?: number;
-            chantier?: components["schemas"]["Chantier4"];
-            /** Format: int32 */
-            id?: number;
-        } | null;
         Ressource: {
-            nom: string;
-            unite: string;
-            /** Format: double */
-            quantite: number;
             /** Format: int32 */
             chantierId?: number;
             chantier?: components["schemas"]["Chantier"];
             /** Format: int32 */
             id?: number;
-        };
-        Ressource2: {
             nom: string;
             unite: string;
-            /** Format: double */
-            quantite: number;
-            /** Format: int32 */
-            chantierId?: number;
-            chantier?: components["schemas"]["Chantier"];
-            /** Format: int32 */
-            id?: number;
-        } | null;
-        /** @enum {unknown} */
-        Role: "None" | "Admin" | "Chef" | "Partenaire" | "Ouvrier";
-        /** @enum {unknown} */
-        StatusChantier: "EnAttente" | "EnCours" | "Terminé" | "Annulé";
-        User: {
-            /**
-             * Format: int32
-             * @description Ignorer lors de la création d'un utilisateur
-             */
-            id?: number;
-            firstName: string;
-            lastName: string;
-            email: string;
-            password: string;
-            userRole: components["schemas"]["Role"];
         };
-        User2: {
+        /**
+         * Format: int32
+         * @enum {integer}
+         */
+        Role: 0 | 1 | 2 | 3 | 4;
+        /**
+         * Format: int32
+         * @enum {integer}
+         */
+        StatusChantier: 0 | 1 | 2 | 3;
+        /**
+         * Format: int32
+         * @enum {integer}
+         */
+        TypeMouvement: 0 | 1;
+        Utilisateur: {
             /**
              * Format: int32
              * @description Ignorer lors de la création d'un utilisateur
              */
             id?: number;
-            firstName: string;
-            lastName: string;
+            prenom: string;
+            nom: string;
             email: string;
-            password: string;
-            userRole: components["schemas"]["Role"];
-        } | null;
+            motDePasse: string;
+            roleUtilisateur: components["schemas"]["Role"];
+        };
     };
     responses: never;
     parameters: never;
@@ -433,153 +548,6 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "admin.user.list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"][];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.user.create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["User2"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.user.read": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.user.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["User2"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.user.delete": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
     "admin.chantier.list": {
         parameters: {
             query?: never;
@@ -616,7 +584,7 @@ export interface operations {
         };
         requestBody?: {
             content: {
-                "application/json": components["schemas"]["Chantier2"];
+                "application/json": components["schemas"]["Chantier"];
             };
         };
         responses: {
@@ -643,7 +611,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
@@ -672,13 +640,13 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
         requestBody?: {
             content: {
-                "application/json": components["schemas"]["Chantier2"];
+                "application/json": components["schemas"]["Chantier"];
             };
         };
         responses: {
@@ -705,154 +673,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.ressource.list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Ressource"][];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.ressource.create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["Ressource2"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Ressource"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.ressource.read": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Ressource"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.ressource.update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["Ressource2"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Ressource"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    "admin.ressource.delete": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
@@ -910,7 +731,7 @@ export interface operations {
         };
         requestBody?: {
             content: {
-                "application/json": components["schemas"]["Mouvement3"];
+                "application/json": components["schemas"]["Mouvement"];
             };
         };
         responses: {
@@ -920,7 +741,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Mouvement2"];
+                    "application/json": components["schemas"]["Mouvement"];
                 };
             };
             /** @description Unauthorized */
@@ -937,7 +758,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
@@ -949,7 +770,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Mouvement2"];
+                    "application/json": components["schemas"]["Mouvement"];
                 };
             };
             /** @description Unauthorized */
@@ -966,13 +787,13 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
         requestBody?: {
             content: {
-                "application/json": components["schemas"]["Mouvement3"];
+                "application/json": components["schemas"]["Mouvement"];
             };
         };
         responses: {
@@ -982,7 +803,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Mouvement2"];
+                    "application/json": components["schemas"]["Mouvement"];
                 };
             };
             /** @description Unauthorized */
@@ -999,7 +820,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: string;
+                id: number;
             };
             cookie?: never;
         };
@@ -1021,6 +842,394 @@ export interface operations {
             };
         };
     };
+    "admin.ressource.list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Ressource"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.ressource.create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Ressource"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Ressource"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.ressource.read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Ressource"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.ressource.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Ressource"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Ressource"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.ressource.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.utilisateur.list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Utilisateur"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.utilisateur.create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Utilisateur"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Utilisateur"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.utilisateur.read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Utilisateur"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.utilisateur.update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["Utilisateur"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Utilisateur"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "admin.utilisateur.delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetAllChantiers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactChantier"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateChantier: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": components["schemas"]["CreateChantierForm"];
+                "application/x-www-form-urlencoded": components["schemas"]["CreateChantierForm"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactChantier"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     "auth.login": {
         parameters: {
             query?: never;
@@ -1028,16 +1237,14 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "multipart/form-data": {
                     login: string;
-                } & {
                     password: string;
                 };
                 "application/x-www-form-urlencoded": {
                     login: string;
-                } & {
                     password: string;
                 };
             };
@@ -1068,18 +1275,16 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody: {
+        requestBody?: {
             content: {
                 "multipart/form-data": {
-                    /** Format: uuid */
-                    userId: string;
-                } & {
+                    /** Format: int32 */
+                    userId: number;
                     newPassword: string;
                 };
                 "application/x-www-form-urlencoded": {
-                    /** Format: uuid */
-                    userId: string;
-                } & {
+                    /** Format: int32 */
+                    userId: number;
                     newPassword: string;
                 };
             };
@@ -1112,7 +1317,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Compact"][];
+                    "application/json": components["schemas"]["CompactRessource"][];
                 };
             };
             /** @description Unauthorized */
@@ -1124,6 +1329,76 @@ export interface operations {
             };
             /** @description Forbidden */
             403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateResource: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": components["schemas"]["CreateResourceForm"];
+                "application/x-www-form-urlencoded": components["schemas"]["CreateResourceForm"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactRessource"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -1158,8 +1433,295 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Compact"];
+                    "application/json": components["schemas"]["CompactRessource"];
                 };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetResourceMovements: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la ressource */
+                resourceId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactMouvement"][];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    CreateMovement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant de la ressource */
+                resourceId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "multipart/form-data": components["schemas"]["CreateMovementForm"];
+                "application/x-www-form-urlencoded": components["schemas"]["CreateMovementForm"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactMouvement"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetMovementById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description L'identifiant du mouvement */
+                movementId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompactMouvement"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GetReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+                /** @description Mois */
+                mois: number;
+                /** @description Année */
+                annee: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    GenerateReport: {
+        parameters: {
+            query: {
+                /** @description Mois */
+                mois: number;
+                /** @description Année */
+                annee: number;
+            };
+            header?: never;
+            path: {
+                /** @description L'identifiant du chantier */
+                chantierId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Unauthorized */
             401: {
