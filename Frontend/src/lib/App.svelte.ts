@@ -106,3 +106,16 @@ export function formBodySerializer(body: any) {
 	}
 	return formData;
 }
+
+export function isAnyOf(target: any, ...args: any[]) {
+	return args.some((arg) => {
+		if (typeof arg === "string") {
+			return target === arg;
+		} else if (typeof arg === "object") {
+			return Object.keys(arg).every((key) => {
+				return target[key] === arg[key];
+			});
+		}
+		return false;
+	});
+}

@@ -42,7 +42,6 @@
 
 	onMount(async () => {
 		document.title = "App - " + getMe()?.firstName + " " + getMe()?.lastName + " - " + getMe()?.userRole;
-		console.log(isLoggedIn());
 		if((!isLoggedIn()))
 		{
 			goto('/');
@@ -55,7 +54,7 @@
     placement="top"
     bind:value
     classes={{
-      content: "border px-4 py-2 rounded-r min-h-[calc(100vh-34px)]",
+      content: "border px-4 py-2 rounded-r min-h-[calc(100vh-34px)] overflow-y-auto",
       tab: { root: "rounded-l" },
     }}>
 	<svelte:fragment slot="content">

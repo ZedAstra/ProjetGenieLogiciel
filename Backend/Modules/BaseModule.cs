@@ -79,6 +79,54 @@ namespace Backend.Modules
                 .Produces(StatusCodes.Status500InternalServerError)
                 .DisableAntiforgery();
 
+            app.MapPost("app/projects/{id}/add_members", async (
+                AppDbContext db,
+                int id,
+                [FromBody] List<int> membres) =>
+            {
+                var chantier = await db.Chantiers.FindAsync(id);
+                if (chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                var membresEntities = await db.Utilisateurs.Where(u => membres.Contains(u.Id)).ToListAsync();
+                chantier.Membres.AddRange(membresEntities);
+                db.Chantiers.Update(chantier);
+                await db.SaveChangesAsync();
+                return Results.Ok(chantier.CompactEntity());
+            })
+                .RequireAuthorization("HighAuthority")
+                .WithName("AddChantierMembers")
+                .WithTags("App")
+                .WithDescription("Ajouter des membres à un chantier")
+                .Produces<Chantier.CompactChantier>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+            // Remove members from a chantier
+            app.MapPost("app/projects/{id}/remove_members", async (
+                AppDbContext db,
+                int id,
+                [FromBody] List<int> membres) =>
+            {
+                var chantier = await db.Chantiers.Include(c => c.Membres).FirstOrDefaultAsync(c => c.Id == id);
+                if (chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                var membresEntities = await db.Utilisateurs.Where(u => membres.Contains(u.Id)).ToListAsync();
+                chantier.Membres.RemoveAll(m => membresEntities.Contains(m));
+                db.Chantiers.Update(chantier);
+                await db.SaveChangesAsync();
+                return Results.Ok(chantier.CompactEntity());
+            })
+                .RequireAuthorization("HighAuthority")
+                .WithName("RemoveChantierMembers")
+                .WithTags("App")
+                .WithDescription("Retirer des membres d'un chantier")
+                .Produces<Chantier.CompactChantier>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
             app.MapPut("app/projects/{id}", async(
                 AppDbContext db,
                 int id,
@@ -139,6 +187,27 @@ namespace Backend.Modules
                 .WithName("GetAllUsers")
                 .WithDescription("Lister tous les utilisateurs")
                 .Produces<List<Utilisateur.SafeUtilisateur>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .Produces(StatusCodes.Status403Forbidden)
+                .Produces(StatusCodes.Status500InternalServerError);
+
+            app.MapGet("app/projects/{id}/members", async (AppDbContext db, int id) =>
+            {
+                var chantier = await db.Chantiers.FindAsync(id);
+                if (chantier == null) return Results.NotFound($"Chantier with id {id} not found");
+                var membres = await db.Utilisateurs
+                    .Include(u => u.Chantiers)
+                    .Where(u => u.Chantiers.Any(c => c.Id == chantier.Id))
+                    .Select(u => u.CompactEntity())
+                    .ToListAsync();
+                return Results.Ok(membres);
+            })
+                .RequireAuthorization()
+                .WithName("GetChantierMembers")
+                .WithTags("App")
+                .WithDescription("Obtenir les membres d'un chantier")
+                .Produces<List<Utilisateur.SafeUtilisateur>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
                 .Produces(StatusCodes.Status401Unauthorized)
                 .Produces(StatusCodes.Status403Forbidden)
                 .Produces(StatusCodes.Status500InternalServerError);
